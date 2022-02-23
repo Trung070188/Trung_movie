@@ -10,6 +10,8 @@ class TagIndex extends Component
 {
     public $showTagModal=false;
     public $tagName;
+    public $tags=[];
+
     public function showCreateModal()
     {
         $this->showTagModal=true;
@@ -25,6 +27,10 @@ class TagIndex extends Component
     public function closetagModal()
     {
         $this->showTagModal=false;
+    }
+    public function mount()
+    {
+        $this->tags=Tag::all();
     }
 
     public function render()
