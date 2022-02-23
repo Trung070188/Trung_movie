@@ -1,46 +1,60 @@
-<div>
-<div>
-    <!-- component -->
-<table class="border-collapse w-full ">
-    <div class="w-full flex mb-4 p-2 justify-end"><x-jet-button>Create Casts</x-jet-button></div>
-    
+<!-- component -->
+
+    <section class="container mx-auto p-6 font-mono">
+        <div class="w-full flex mb-4 p-2 justify-end">
+            <form class="flex space-x-4 shadow ">
+                <div class="p-1 flex items-center">
+                <label for="tmdb_id_g" class="block text-sm font-medium text-gray-700 mr-4">Cast Tmdb Id</label>
+                    <div class="relative rounded-md shadow-sm">
+                        <input wire:model="castTMDBId" id="tmdb_id_g" name="tmdb_id_g" class="px-3 py-2 border border-gray-300 rounded" placeholder="Cast ID" />
+                    </div>
+                </div>
+                <div class="p-1">
+                    <button type="button" wire:click="generateCast" class="inline-flex items-center justify-center py-2 px-4 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-green-700 transition duration-150 ease-in-out disabled:opacity-50">
+                        <span>Generate</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+<div class="w-full overflow-x-auto">
+    <table class="w-full">
     <thead>
-        <tr>
-            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Title</th>
-            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Date</th>
-            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Rating</th>
-            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Public</th>
-            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Manage</th>
+            <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                <th class="px-4 py-3">Name</th>
+                <th class="px-4 py-3">Slug</th>
+                <th class="px-4 py-3">Poster</th>
+                <th class="px-4 py-3">Manage</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Company name</span>
-                Title here
-            </td>
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Country</span>
-                Data here
-            </td>
-          	<td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Status</span>
-                <span class="rounded bg-red-400 py-1 px-3 text-xs font-bold">Rating here</span>
-          	</td>
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Actions</span>
-                <a href="#" class="text-blue-400 hover:text-blue-600 underline">public here</a>
-            </td>
-            
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-                Edit/Delete
-            </td>
-        </tr>
-       
-       
-    </tbody>
-</table>
-</div>
+            </tr>
+        </thead>
+        <tbody class="bg-white"> 
+            @foreach($casts as $cast)
 
+            <tr class="class=text-gray-700">
+                <td class="px-4 py-3 border">
+                    {{$cast->name}}
+                </td>
+                <td class="px-4 py-3 border">
+                    {{$cast->slug}}
+                </td>
+                <td class="px-4 py-3 border">
+                    {{$cast->poster_path}}
+                </td>
+
+                <td class="px-4 py-3 border">
+                    Edit/Delete
+                </td>
+            </tr>
+
+            @endforeach
+        </tbody>
+
+    </table>
 </div>
+        
+<div class="m-2 p-2">
+                {{ $casts->links() }}
+            </div>
+    </section>
+
+

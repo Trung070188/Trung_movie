@@ -1,48 +1,47 @@
-<section>
-  <!-- component -->
-  <table class="border-collapse w-full ">
-    <div class="w-full flex mb-4 p-2 justify-end">
-      <x-jet-button wire:click="showCreateModal">Create Tags</x-jet-button>
-    </div>
+<section class="container mx-auto p-6 font-mono ">
+  <div class="w-full flex mb-4 p-2 justify-end">
+    <x-jet-button wire:click="showCreateModal">Create Tags</x-jet-button>
+  </div>
+  <div class="w-full overflow-x-auto">
+    <table class="w-full">
+      <thead>
+        <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+          <th class="px-4 py-3">Name</th>
+          <th class="px-4 py-3">Slug</th>
+          <th class="px-4 py-3">Manage</th>
 
-    <thead>
-      <tr>
-        <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Name</th>
-        <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Slug</th>
-        <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Manage</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white"> 
 
-      </tr>
-    </thead>
-    <tbody>
-      @forelse($tags as $tag)
-      <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-          <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Company name</span>
-          {{$tag->tag_name}}
-        </td>
-        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-          <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Country</span>
-          {{$tag->slug}}
-        </td>
+  </div>
 
-
-        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-          <x-m-button wire:click="showEditModal({{$tag->id}})" class="bg-green-500 hover:bg-green-700 text-white">Edit</x-m-button>
-          <x-m-button wire:click="deleteTag({{$tag->id}})" class="bg-red-500 hover:bg-red-700 text-white">Delete</x-m-button>
-        </td>
-      </tr>
-
-      @empty
-      <tr class="text-gray-700">
-        <td class="px-4 py-3 boder ">
-          Empty
-        </td>
-      </tr>
-      @endforelse
+  @forelse($tags as $tag)
+  <tr class="class=text-gray-700">
+    <td class="px-4 py-3 border">
+      {{$tag->tag_name}}
+    </td>
+    <td class="px-4 py-3 border">
+      {{$tag->slug}}
+    </td>
 
 
+    <td class="px-4 py-3 border">
+      <x-m-button wire:click="showEditModal({{$tag->id}})" class="bg-green-500 hover:bg-green-700 text-white">Edit</x-m-button>
+      <x-m-button wire:click="deleteTag({{$tag->id}})" class="bg-red-500 hover:bg-red-700 text-white">Delete</x-m-button>
+    </td>
+  </tr>
 
-    </tbody>
+  @empty
+  <tr class="text-gray-700">
+    <td class="px-4 py-3 boder ">
+      Empty
+    </td>
+  </tr>
+  @endforelse
+
+
+
   </table>
   <x-jet-dialog-modal wire:model="showTagModal">
     @if ($tagId)
